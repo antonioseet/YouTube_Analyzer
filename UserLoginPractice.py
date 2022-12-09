@@ -1,16 +1,18 @@
 # pip install customtkinter
 import customtkinter
 
+rememberBool = False
 
 def login():
+    global rememberBool
     print("LOGIN" + str(rememberBool))
 
 def remember():
+    global rememberBool
     temp = not rememberBool
     rememberBool = temp
     print(rememberBool)
 
-rememberBool = False
 
 customtkinter.set_appearance_mode("dark")
 customtkinter.set_default_color_theme("green")
