@@ -33,7 +33,7 @@ def getTopKResults(k: int, option: int) -> list:
 # top rated
     else:
         results = db['VideoData']['videos'].aggregate([{'$sort' : {'rate': -1, 'ratings': -1}}, {'$limit': int(k)}])
-        #return topRatedStrings(results)
+        return topRatedStrings(results)
 
     return results
     
@@ -46,8 +46,7 @@ def getVideoResults(minView: int, maxView: int, minLen: int, maxLen: int, minrat
 
     if maxLen == 0:
         maxLen = gmaxLen
-
-    #results = db['VideoData']['videos'].aggregate([{'$bucket': {'groupBy': '$rate', 'boundaries': [ 0, 1, 2, 3, 4, 5.1], 'output': {'counts': {'$sum': 1}}}}])
+    
     filter={
     'views': {
         '$gt': minView, 
@@ -78,8 +77,7 @@ def getFrequencyResults(minView: int, maxView: int, minLen: int, maxLen: int, mi
 
     if maxLen == 0:
         maxLen = gmaxLen
-
-    #results = db['VideoData']['videos'].aggregate([{'$bucket': {'groupBy': '$rate', 'boundaries': [ 0, 1, 2, 3, 4, 5.1], 'output': {'counts': {'$sum': 1}}}}])
+    
     filter={
     'views': {
         '$gt': minView, 

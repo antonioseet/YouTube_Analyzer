@@ -16,21 +16,31 @@ def frequencyResult():
 
     #separate the view count
     viewCounts = viewEntryBox.get()
-    viewCountsList = viewCounts.split()
 
-    print(viewCountsList)
-    minViewCount = int(viewCountsList[0])
-    maxViewCount = int(viewCountsList[1])
+    if viewCounts:
+        viewCountsList = viewCounts.split()
+        minViewCount = int(viewCountsList[0])
+        maxViewCount = int(viewCountsList[1])
+    else:
+        minViewCount = 0
+        maxViewCount = 0
 
     #separate the length
     lengthCounts = lengthEntryBox.get()
-    lengthCountsList = lengthCounts.split()
 
-    print(lengthCountsList)
-    minLength = int(lengthCountsList[0])
-    maxLength = int(lengthCountsList[1])
-    minRate = int(lengthCountsList[2])
-    maxRate = int(lengthCountsList[3])
+    if lengthCounts:
+        lengthCountsList = lengthCounts.split()
+        minLength = int(lengthCountsList[0])
+        maxLength = int(lengthCountsList[1])
+        minRate = int(lengthCountsList[2])
+        maxRate = int(lengthCountsList[3])
+        if maxRate == 0:
+            maxRate = 5
+    else:
+        minLength = 0
+        maxLength = 0
+        minRate = 0
+        maxRate = 5
 
     categoryStr = comboBox2.get()
 
@@ -40,23 +50,30 @@ def frequencyResult():
 def videoResults():
     rb.delete(0,END)
 
-    #separate the view count
     viewCounts = ve.get()
-    viewCountsList = viewCounts.split()
-
-    print(viewCountsList)
-    minViewCount = int(viewCountsList[0])
-    maxViewCount = int(viewCountsList[1])
+    if viewCounts:
+        viewCountsList = viewCounts.split()
+        minViewCount = int(viewCountsList[0])
+        maxViewCount = int(viewCountsList[1])
+    else:
+        minViewCount = 0
+        maxViewCount = 0
 
     #separate the length
     lengthCounts = eb.get()
-    lengthCountsList = lengthCounts.split()
-
-    print(lengthCountsList)
-    minLength = int(lengthCountsList[0])
-    maxLength = int(lengthCountsList[1])
-    minRate = int(lengthCountsList[2])
-    maxRate = int(lengthCountsList[3])
+    if lengthCounts:
+        lengthCountsList = lengthCounts.split()
+        minLength = int(lengthCountsList[0])
+        maxLength = int(lengthCountsList[1])
+        minRate = int(lengthCountsList[2])
+        maxRate = int(lengthCountsList[3])
+        if maxRate == 0:
+            maxRate = 5
+    else:
+        minLength = 0
+        maxLength = 0
+        minRate = 0
+        maxRate = 5
 
     categoryStr = cb.get()
 
@@ -64,11 +81,11 @@ def videoResults():
 
     count = 1
     for item in res:
-        rb.insert(count, item)
+        rb.insert(count, str(count) + ') ' + item)
         count = count + 1
 
 width = 1000
-height = 1000
+height = 900
 geoString = str(width)+"x"+str(height)
 
 root = Tk()
