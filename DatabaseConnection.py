@@ -76,17 +76,8 @@ def getFrequencyResults(minView: int, maxView: int, minLen: int, maxLen: int, mi
     if maxView == 0:
         maxView = gmaxView
 
-    print('maxLen: ' + str(maxLen))
     if maxLen == 0:
-        print('inside if')
-        maxLen = 4597587
-    print('maxLen: ' + str(maxLen))
-    print(minView)
-    print(maxView)
-    print(minLen)
-    print(maxLen)
-    print(minrate)
-    print(maxrate)
+        maxLen = gmaxLen
 
     #results = db['VideoData']['videos'].aggregate([{'$bucket': {'groupBy': '$rate', 'boundaries': [ 0, 1, 2, 3, 4, 5.1], 'output': {'counts': {'$sum': 1}}}}])
     filter={
