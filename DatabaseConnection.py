@@ -47,20 +47,35 @@ def getVideoResults(minView: int, maxView: int, minLen: int, maxLen: int, minrat
     if maxLen == 0:
         maxLen = gmaxLen
     
-    filter={
-    'views': {
-        '$gt': minView, 
-        '$lt': maxView
-    }, 
-    'rate': {
-        '$gt': minrate, 
-        '$lt': maxrate
-    }, 
-    'length': {
-        '$gt': minLen, 
-        '$lt': maxLen
-    }, 
-    'category': category}
+    if category:
+        filter={
+        'views': {
+            '$gt': minView, 
+            '$lt': maxView
+        }, 
+        'rate': {
+            '$gt': minrate, 
+            '$lt': maxrate
+        }, 
+        'length': {
+            '$gt': minLen, 
+            '$lt': maxLen
+        }, 
+        'category': category}
+    else:
+        filter={
+        'views': {
+            '$gt': minView, 
+            '$lt': maxView
+        }, 
+        'rate': {
+            '$gt': minrate, 
+            '$lt': maxrate
+        }, 
+        'length': {
+            '$gt': minLen, 
+            '$lt': maxLen
+        }}
 
     results = db['VideoData']['videos'].find(filter=filter)
     listRes = list(results)
@@ -78,20 +93,38 @@ def getFrequencyResults(minView: int, maxView: int, minLen: int, maxLen: int, mi
     if maxLen == 0:
         maxLen = gmaxLen
     
-    filter={
-    'views': {
-        '$gt': minView, 
-        '$lt': maxView
-    }, 
-    'rate': {
-        '$gt': minrate, 
-        '$lt': maxrate
-    }, 
-    'length': {
-        '$gt': minLen, 
-        '$lt': maxLen
-    }, 
-    'category': category}
+    if category:
+
+        filter={
+        'views': {
+            '$gt': minView, 
+            '$lt': maxView
+        }, 
+        'rate': {
+            '$gt': minrate, 
+            '$lt': maxrate
+        }, 
+        'length': {
+            '$gt': minLen, 
+            '$lt': maxLen
+        }, 
+        'category': category}
+
+    else:
+
+        filter={
+        'views': {
+            '$gt': minView, 
+            '$lt': maxView
+        }, 
+        'rate': {
+            '$gt': minrate, 
+            '$lt': maxrate
+        }, 
+        'length': {
+            '$gt': minLen, 
+            '$lt': maxLen
+        }}
 
     results = db['VideoData']['videos'].find(filter=filter)
     count = len(list(results))
@@ -113,7 +146,7 @@ def mostPopularStrings(messyList: list):
 def topRatedStrings(messyList: list):
     results = list()
     for item in messyList:
-        results.append(str(item['vidid']) + " uploaded by " + str(item['uploader'])+ ", received "  + str(item['ratings']) + " ratings and scored: " + str(item['rate']))
+        results.append("received "  + str(item['ratings']) + " ratings and scored: " + str(item['rate']) + " out of 5 | video: " + str(item['vidid']) + " uploaded by " + str(item['uploader']))
     return results
 
 def videoResultsStrings(messyList: list):

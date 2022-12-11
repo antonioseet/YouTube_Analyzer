@@ -8,7 +8,7 @@ def topKResults():
     count = 1
     topKResultsBox.delete(0,END)
     for item in dbc.getTopKResults(kEntryBox.get(),comboBox.current()):
-        topKResultsBox.insert(count, item)
+        topKResultsBox.insert(count, str(count) + ') ' + item)
         count = count + 1
 
 def frequencyResult():
