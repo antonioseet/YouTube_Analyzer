@@ -1,4 +1,5 @@
-# pip install customtkinter
+# Team BAGS - CptS 415 - Big Data
+# pip install tk
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
@@ -11,12 +12,14 @@ def topKResults():
         topKResultsBox.insert(count, str(count) + ') ' + item)
         count = count + 1
 
+# frequency of videos as stated in the project info, assumed to be how frequent/how many times the vieos under these conditions occour.
 def frequencyResult():
     freqResultsBox.delete(0,END)
 
     #separate the view count
     viewCounts = viewEntryBox.get()
 
+    #if not empty
     if viewCounts:
         viewCountsList = viewCounts.split()
         minViewCount = int(viewCountsList[0])
@@ -28,6 +31,7 @@ def frequencyResult():
     #separate the length
     lengthCounts = lengthEntryBox.get()
 
+    # if not empty
     if lengthCounts:
         lengthCountsList = lengthCounts.split()
         minLength = int(lengthCountsList[0])
@@ -38,6 +42,7 @@ def frequencyResult():
             maxRate = 5
     else:
         minLength = 0
+        # this ensures we get the max value in the results
         maxLength = 0
         minRate = 0
         maxRate = 5
@@ -47,10 +52,13 @@ def frequencyResult():
     count = dbc.getFrequencyResults(minViewCount, maxViewCount, minLength, maxLength, minRate, maxRate, categoryStr)
     freqResultsBox.insert(1, count)
 
+# basaed on criteria returns the list of video info.
 def videoResults():
     rb.delete(0,END)
 
     viewCounts = ve.get()
+
+    # if not empty
     if viewCounts:
         viewCountsList = viewCounts.split()
         minViewCount = int(viewCountsList[0])
@@ -59,7 +67,7 @@ def videoResults():
         minViewCount = 0
         maxViewCount = 0
 
-    #separate the length
+    # separate the length
     lengthCounts = eb.get()
     if lengthCounts:
         lengthCountsList = lengthCounts.split()
@@ -71,6 +79,7 @@ def videoResults():
             maxRate = 5
     else:
         minLength = 0
+        # this ensures we get the max value in the results
         maxLength = 0
         minRate = 0
         maxRate = 5
@@ -95,7 +104,8 @@ root.geometry(geoString)
 notebook = ttk.Notebook(root)
 notebook.pack()
 
-################################################### FRAME 1 ##########################################
+# FRAME 1 # - Top K
+
 frame1 = Frame(master=notebook, width=width, height=height, bg="gray")
 frame1.pack(fill="both", expand=1)
 
@@ -120,7 +130,7 @@ topKResultsBox.place(relx=0.01, rely=0.17, anchor=tk.NW)
 
 notebook.add(frame1, text="Top K Queries")
 
-############################### FRAME 2 #############################################
+# FRAME 2 # - Categorization / Frequency
 
 frame2 = Frame(notebook, width=width, height=height, bg="gray")
 frame2.pack(fill="both", expand=1)
@@ -152,11 +162,10 @@ freqResultsBox = Listbox(frame2, width=20, height=1, bg='gray')
 freqResultsBox.place(relx=0.01, rely=0.23, anchor=tk.NW)
 notebook.add(frame2, text="Categorization")
 
-##################################### FRAME 3 ##########################################
+# FRAME 3 # - Range Queries
 
 frame3 = Frame(notebook, width=width, height=height, bg="gray")
 frame3.pack(fill="both", expand=1)
-
 
 label2 = Label(frame3, text="Enter numbers in the form x y: x = min View count; y = max view count", bg="gray")
 label2.place(relx=0.01, rely=0.02, anchor=tk.NW)

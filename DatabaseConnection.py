@@ -1,3 +1,4 @@
+# Team BAGS - CptS 415 - Big Data
 # pip install "pymongo[srv]"
 from pymongo import MongoClient
 
@@ -130,12 +131,14 @@ def getFrequencyResults(minView: int, maxView: int, minLen: int, maxLen: int, mi
     count = len(list(results))
     return count
     
+# Readable list of strings for results
 def topCategoriesStrings(messyList: list):
     results = list()
     for item in messyList:
         results.append(str(item['_id']) + " | use count: " + str(item['count']))
     return results
 
+# Readable list of strings for results
 def mostPopularStrings(messyList: list):
     results = list()
     for item in messyList:
@@ -143,28 +146,32 @@ def mostPopularStrings(messyList: list):
         results.append(str(item['uploader']) + " uploaded " + str(item['vidid'])+ " and received "  + str(formatted) + " views.")
     return results
 
+# Readable list of strings for results
 def topRatedStrings(messyList: list):
     results = list()
     for item in messyList:
         results.append("received "  + str(item['ratings']) + " ratings and scored: " + str(item['rate']) + " out of 5 | video: " + str(item['vidid']) + " uploaded by " + str(item['uploader']))
     return results
 
+# Readable list of strings for results
 def videoResultsStrings(messyList: list):
     results = list()
     for item in messyList:
         results.append(str(item['vidid']) + " uploaded by " + str(item['uploader'])+ ", received "  + str(item['views']) + " views and scored: " + str(item['rate']))
     return results
 
+def test():
+
+    db = get_database()
+    result = getVideoResults(200000, 1000000, 0, 1000, 4, 5, 'Sports')
+    for i in result:
+        print(i)
+
 # This is added so that many files can reuse the function get_database()
 if __name__ == "__main__":   
 
-    # Get the database
-    db = get_database()
-
-    #results = getTopKResults(10, 2)#db['VideoData']['videos'].find(filter=filter)
-    result = getVideoResults(200000, 1000000, 0, 1000, 4, 5, 'Sports')
-    print(result)
-    #for i in result:
-    #    print(i)
-
+    #test()
+    print('__________')
+    print("uncomment above to test method to test though the console, OR")
+    print("Run UserInterface.py to run the UI")
     print('__________')
